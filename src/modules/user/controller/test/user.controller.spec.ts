@@ -27,8 +27,9 @@ describe('Controllers - [User]', () => {
       return Promise.resolve(new ReadUserDTO());
     });
 
-    await userController.createUser(user);
+    const response = await userController.createUser(user);
 
     expect(userService.createUser).toHaveBeenCalledWith(user);
-  });
+    expect(response).toBeInstanceOf(ReadUserDTO)
+  })
 });
