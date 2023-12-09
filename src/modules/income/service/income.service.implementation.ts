@@ -10,6 +10,7 @@ export class IncomeServiceImplementation implements IncomeService {
 
   async createIncome(dto: CreateIncomeDTO): Promise<ReadIncomeDTO> {
     const created = await this.incomeRepository.createIncome(dto);
+    console.log({ created });
     return mapIncomeToReadIncomeDTO(created);
   }
 }

@@ -1,4 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+} from 'typeorm';
 import { User } from 'modules/user/user.entity';
 import { IncomeCategory } from 'modules/income/entities/income-category.entity';
 import { BaseEntity } from 'modules/shared/entities';
@@ -22,6 +29,7 @@ export class Income extends BaseEntity {
   date: Date;
 
   @ManyToMany(() => IncomeCategory, (incomeCategory) => incomeCategory.incomes)
+  @JoinTable()
   categories?: IncomeCategory[];
 
   constructor(partial: Partial<Income> = {}) {

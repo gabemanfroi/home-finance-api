@@ -8,9 +8,11 @@ import {
   IncomeRepository,
   IncomeRepositoryImplementation,
 } from 'modules/income/repository';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Income, IncomeCategory } from 'modules/income/entities';
 
 @Module({
-  imports: [],
+  imports: [TypeOrmModule.forFeature([Income, IncomeCategory])],
   controllers: [IncomeControllerImplementation],
   providers: [
     {

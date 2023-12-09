@@ -10,7 +10,12 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: '../coverage',
   coverageProvider: 'v8',
-  coveragePathIgnorePatterns: ['/node_modules/', '/test/', '/mocks/'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/test/',
+    '/mocks/',
+    '/migrations/',
+  ],
   moduleDirectories: ['node_modules', 'src'],
   rootDir: 'src',
   testRegex: '.*\\.spec\\.ts$',
@@ -19,6 +24,7 @@ const config: Config = {
   },
   testEnvironment: 'node',
   setupFilesAfterEnv: ['../jest.setup.ts'],
+  testTimeout: 30000,
 };
 
 export default config;

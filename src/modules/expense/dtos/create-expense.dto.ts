@@ -1,7 +1,7 @@
 import {
   ArrayNotEmpty,
   IsArray,
-  IsDate,
+  IsDateString,
   IsNotEmpty,
   IsNumber,
   IsString,
@@ -24,7 +24,7 @@ export class CreateExpenseDTO {
   @IsNotEmpty()
   title: string;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   date: Date;
 }
