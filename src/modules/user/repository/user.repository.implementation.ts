@@ -11,11 +11,12 @@ export class UserRepositoryImplementation implements UserRepository {
   ) {}
 
   async createUser(dto: CreateUserDTO): Promise<User> {
-    const user = new User();
-    user.email = dto.email;
-    user.firstName = dto.firstName;
-    user.lastName = dto.lastName;
-    user.password = dto.password;
+    const user = new User({
+      password: dto.password,
+      email: dto.email,
+      firstName: dto.firstName,
+      lastName: dto.lastName,
+    });
     return this.typeOrm.save(user);
   }
 }

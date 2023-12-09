@@ -1,5 +1,5 @@
 export class ReadBaseDTO {
-  id: string;
+  id: number;
   createdAt: Date;
   updatedAt: Date;
 }

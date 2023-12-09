@@ -2,6 +2,7 @@ import { UserService } from 'modules/user/service/user.service';
 import { UserRepository } from 'modules/user/repository/user.repository';
 import { CreateUserDTO, ReadUserDTO } from 'modules/user/dtos';
 import { Injectable } from '@nestjs/common';
+import { mapUserToReadUserDTO } from 'modules/user/mappers';
 
 @Injectable()
 export class UserServiceImplementation implements UserService {
@@ -9,7 +10,6 @@ export class UserServiceImplementation implements UserService {
 
   async createUser(dto: CreateUserDTO): Promise<ReadUserDTO> {
     const user = await this.userRepository.createUser(dto);
-    console.log({ user });
-    return {} as ReadUserDTO;
+    return mapUserToReadUserDTO(user);
   }
 }

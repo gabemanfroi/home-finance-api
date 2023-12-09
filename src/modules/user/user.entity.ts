@@ -1,11 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { Expense } from 'modules/expense/entities/expense.entity';
+import { BaseEntity } from 'modules/shared/entities';
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class User extends BaseEntity {
   @Column()
   firstName: string;
 
@@ -20,4 +18,9 @@ export class User {
 
   @OneToMany(() => Expense, (expense) => expense.user)
   expenses: Expense[];
+
+  constructor(partial: Partial<User>) {
+    super();
+    Object.assign(this, partial);
+  }
 }
