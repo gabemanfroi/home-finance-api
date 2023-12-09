@@ -1,7 +1,7 @@
 import { IncomeRepository } from 'modules/income/repository/income.repository';
 import { Injectable } from '@nestjs/common';
-import { CreateIncomeDTO } from '../dtos';
-import { Income } from '../income.model';
+import { CreateIncomeDTO } from 'modules/income/dtos';
+import { Income } from 'modules/income/income.entity';
 
 @Injectable()
 export class IncomeRepositoryImplementation implements IncomeRepository {
