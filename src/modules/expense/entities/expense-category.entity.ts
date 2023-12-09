@@ -10,5 +10,5 @@ export class ExpenseCategory {
   title: string;
 
   @ManyToMany(() => Expense, (expense) => expense.categories)
-  expenses: Expense[];
+  expenses?: Expense[];
 }

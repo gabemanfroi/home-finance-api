@@ -1,16 +1,17 @@
 import { ReadBaseDTO } from 'modules/shared/dtos/read-base.dto';
-import { ReadUserDTO } from 'modules/user/dtos';
 
 export class ReadExpenseDTO extends ReadBaseDTO {
-  total: {
-    amount: number;
-    currency: string;
-  };
+  amount: number;
   categories: {
     id: number;
-    name: string;
+    title: string;
   }[];
-  user: Pick<ReadUserDTO, 'id'>;
+  userId: number;
   title: string;
   date: Date;
+
+  constructor(partial: Partial<ReadExpenseDTO> = {}) {
+    super();
+    Object.assign(this, partial);
+  }
 }

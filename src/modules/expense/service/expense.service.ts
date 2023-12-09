@@ -1,5 +1,4 @@
-import { CreateExpenseDTO } from '../dtos/create-expense.dto';
-import { ReadExpenseDTO } from '../dtos/read-expense.dto';
+import { CreateExpenseDTO, ReadExpenseDTO } from 'modules/expense/dtos';
 
 export abstract class ExpenseService {
   abstract createExpense(dto: CreateExpenseDTO): Promise<ReadExpenseDTO>;

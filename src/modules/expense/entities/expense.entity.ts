@@ -1,18 +1,10 @@
-import {
-  Column,
-  Entity,
-  ManyToMany,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
 import { User } from 'modules/user/user.entity';
 import { ExpenseCategory } from 'modules/expense/entities/expense-category.entity';
+import { BaseEntity } from 'modules/shared/entities';
 
 @Entity()
-export class Expense {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Expense extends BaseEntity {
   @Column()
   title: string;
 
@@ -29,5 +21,5 @@ export class Expense {
     () => ExpenseCategory,
     (expenseCategory) => expenseCategory.expenses,
   )
-  categories: ExpenseCategory[];
+  categories?: ExpenseCategory[];
 }
