@@ -1,5 +1,5 @@
-import { CreateExpenseDTO } from "../dtos/create-expense.dto";
-import { Expense } from "../expense.model";
+import { CreateExpenseDTO } from 'modules/expense/dtos';
+import { Expense } from 'modules/expense/expense.model';
 
 export abstract class ExpenseRepository {
   abstract createExpense(dto: CreateExpenseDTO): Promise<Expense>;
