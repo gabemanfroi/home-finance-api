@@ -1,1 +1,2 @@
-export * from 'modules/income/repository/incomeRepository';
+export * from './income.repository';
+export * from './income.repository.implementation';

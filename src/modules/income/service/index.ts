@@ -1,2 +1,2 @@
-export * from './expense.service.implementation';
-export * from 'modules/income/service/incomeService';
+export * from './income.service.implementation';
+export * from './income.service';

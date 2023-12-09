@@ -1,6 +1,6 @@
 import { IncomeRepository } from '../repository';
-import { IncomeService } from 'modules/income/service/incomeService';
 import { CreateIncomeDTO, ReadIncomeDTO } from 'modules/income/dtos';
+import { IncomeService } from 'modules/income/service';
 
 export class IncomeServiceImplementation implements IncomeService {
   constructor(private readonly expenseRepository: IncomeRepository) {}

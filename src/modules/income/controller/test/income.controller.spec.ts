@@ -3,8 +3,8 @@ import {
   IncomeControllerImplementation,
 } from 'modules/income/controller';
 import { CreateIncomeDTO, ReadIncomeDTO } from 'modules/income/dtos';
-import { IncomeService } from 'modules/income/service';
 import { IncomeServiceMock } from './utils';
+import { IncomeService } from 'modules/income/service';
 
 describe('Controllers - [Income]', () => {
   let incomeController: IncomeController;
