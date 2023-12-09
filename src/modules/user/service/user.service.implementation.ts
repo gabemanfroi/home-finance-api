@@ -8,8 +8,8 @@ export class UserServiceImplementation implements UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   async createUser(dto: CreateUserDTO): Promise<ReadUserDTO> {
-    const user = this.userRepository.createUser(dto);
-    console.log(user);
+    const user = await this.userRepository.createUser(dto);
+    console.log({ user });
     return {} as ReadUserDTO;
   }
 }
