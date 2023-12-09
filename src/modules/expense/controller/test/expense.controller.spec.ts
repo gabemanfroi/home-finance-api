@@ -39,7 +39,7 @@ describe('Controllers - [Expense]', () => {
     jest.spyOn(expenseService, 'createExpense');
 
     const result = await expenseController.createExpense(expense);
-    expect(expenseService.createExpense).toHaveBeenCalled();
+    expect(expenseService.createExpense).toHaveBeenNthCalledWith(1, expense);
     expect(result).toBeInstanceOf(ReadExpenseDTO);
   });
 });

@@ -1,17 +1,30 @@
-import { UserServiceMock } from './utils';
 import { UserService } from 'modules/user/service';
 import {
   UserController,
   UserControllerImplementation,
 } from 'modules/user/controller/';
 import { CreateUserDTO, ReadUserDTO } from 'modules/user/dtos';
+import { Test } from '@nestjs/testing';
+import { UserServiceMock } from 'modules/user/controller/test/utils';
 
 describe('Controllers - [User]', () => {
   let userController: UserController;
   let userService: UserService;
-  beforeEach(() => {
-    userService = new UserServiceMock();
-    userController = new UserControllerImplementation(userService);
+  beforeEach(async () => {
+    const module = await Test.createTestingModule({
+      controllers: [UserControllerImplementation],
+      providers: [
+        {
+          provide: UserService,
+          useClass: UserServiceMock,
+        },
+      ],
+    }).compile();
+
+    userController = module.get<UserControllerImplementation>(
+      UserControllerImplementation,
+    );
+    userService = module.get<UserService>(UserService);
   });
 
   it('should create a user', async () => {
@@ -29,7 +42,7 @@ describe('Controllers - [User]', () => {
 
     const response = await userController.createUser(user);
 
-    expect(userService.createUser).toHaveBeenCalledWith(user);
-    expect(response).toBeInstanceOf(ReadUserDTO)
-  })
+    expect(userService.createUser).toHaveBeenNthCalledWith(1, user);
+    expect(response).toBeInstanceOf(ReadUserDTO);
+  });
 });
