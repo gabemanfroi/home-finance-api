@@ -1,6 +1,6 @@
 import { CreateIncomeDTO } from 'modules/income/dtos';
-import { Income } from 'modules/income/income.entity';
+import { Income } from 'modules/income/entities';
 
 export abstract class IncomeRepository {
-  abstract createExpense(dto: CreateIncomeDTO): Promise<Income>;
+  abstract createIncome(dto: CreateIncomeDTO): Promise<Income>;
 }

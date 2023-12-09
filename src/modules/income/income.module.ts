@@ -23,4 +23,4 @@ import {
     },
   ],
 })
-export class UserModule {}
+export class IncomeModule {}

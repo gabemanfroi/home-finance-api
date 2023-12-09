@@ -36,8 +36,10 @@ describe('Service - [Expense]', () => {
     const randomCreateExpenseDTO: CreateExpenseDTO =
       buildRandomCreateExpenseDTO();
 
+    jest.spyOn(expenseRepository, 'createExpense');
     const result = await expenseService.createExpense(randomCreateExpenseDTO);
 
+    expect(expenseRepository.createExpense).toHaveBeenCalledTimes(1);
     expect(result).toBeInstanceOf(ReadExpenseDTO);
     expect(result).toMatchObject<ReadExpenseDTO>({
       amount: randomCreateExpenseDTO.amount,
