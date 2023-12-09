@@ -1,5 +1,5 @@
 import { ExpenseRepository } from 'modules/expense/repository/expense.repository';
-import { Expense } from '../expense.model';
+import { Expense } from '../expense.entity';
 import { CreateExpenseDTO } from 'modules/expense/dtos';
 
 export class ExpenseRepositoryImplementation implements ExpenseRepository {
