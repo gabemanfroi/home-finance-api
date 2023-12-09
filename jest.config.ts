@@ -18,6 +18,7 @@ const config: Config = {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
   testEnvironment: 'node',
+  setupFilesAfterEnv: ['../jest.setup.ts'],
 };
 
 export default config;

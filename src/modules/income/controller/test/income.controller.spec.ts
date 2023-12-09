@@ -5,7 +5,7 @@ import {
 import { CreateIncomeDTO, ReadIncomeDTO } from 'modules/income/dtos';
 import { IncomeService } from 'modules/income/service';
 import { Test } from '@nestjs/testing';
-import { IncomeServiceMock } from 'modules/income/controller/test/utils';
+import { IncomeServiceMock } from 'utils/mocks';
 
 describe('Controllers - [Income]', () => {
   let incomeController: IncomeController;

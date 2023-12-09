@@ -4,8 +4,8 @@ import {
 } from 'modules/expense/controller';
 import { CreateExpenseDTO, ReadExpenseDTO } from 'modules/expense/dtos';
 import { ExpenseService } from 'modules/expense/service';
-import { ExpenseServiceMock } from './utils';
 import { Test } from '@nestjs/testing';
+import { ExpenseServiceMock } from 'utils/mocks';
 
 describe('Controllers - [Expense]', () => {
   let expenseController: ExpenseController;

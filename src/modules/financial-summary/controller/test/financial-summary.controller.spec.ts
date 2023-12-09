@@ -5,7 +5,7 @@ import {
 import { FinancialSummaryService } from 'modules/financial-summary/service';
 import { ReadFinancialSummaryDTO } from 'modules/financial-summary/dtos';
 import { Test } from '@nestjs/testing';
-import { FinancialSummaryServiceMock } from 'modules/financial-summary/controller/test/utils';
+import { FinancialSummaryServiceMock } from 'utils/mocks';
 
 describe('Controller - [FinancialSummary]', () => {
   let financialSummaryController: FinancialSummaryController;
