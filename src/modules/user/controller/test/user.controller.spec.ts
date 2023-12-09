@@ -5,7 +5,7 @@ import {
 } from 'modules/user/controller/';
 import { CreateUserDTO, ReadUserDTO } from 'modules/user/dtos';
 import { Test } from '@nestjs/testing';
-import { UserServiceMock } from 'modules/user/controller/test/utils';
+import { UserServiceMock } from 'utils/mocks';
 
 describe('Controllers - [User]', () => {
   let userController: UserController;

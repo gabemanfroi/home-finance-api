@@ -1,6 +1,6 @@
-import { buildRandomUser } from 'utils/mocks/entities/user.mock';
 import { mapUserToReadUserDTO } from 'modules/user/mappers/model-to-read-dto';
 import { ReadUserDTO } from 'modules/user/dtos';
+import { buildRandomUser } from 'utils/mocks';
 
 describe('Model To ReadDTO - [User]', () => {
   it('should map User to a ReadDTO', () => {
