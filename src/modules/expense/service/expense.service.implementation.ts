@@ -1,10 +1,10 @@
-import { CreateExpenseDTO } from "../dtos/create-expense.dto";
-import { ReadExpenseDTO } from "../dtos/read-expense.dto";
-import { ExpenseRepository } from "../repository";
-import { ExpenseService } from "./expense.service";
+import { ExpenseRepository } from '../repository';
+import { ExpenseService } from './expense.service';
+import { CreateExpenseDTO, ReadExpenseDTO } from 'modules/expense/dtos';
 
-export class ExpenseControllerImplementation implements ExpenseService {
-  constructor(private readonly expenseRepository: ExpenseRepository) { }
+export class ExpenseServiceImplementation implements ExpenseService {
+  constructor(private readonly expenseRepository: ExpenseRepository) {}
+
   async createExpense(dto: CreateExpenseDTO): Promise<ReadExpenseDTO> {
     const created = this.expenseRepository.createExpense(dto);
     return new ReadExpenseDTO();

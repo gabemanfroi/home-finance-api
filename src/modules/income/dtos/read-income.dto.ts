@@ -1,11 +1,8 @@
 import { ReadBaseDTO } from 'modules/shared/dtos/read-base.dto';
 import { ReadUserDTO } from 'modules/user/dtos';
 
-export class ReadExpenseDTO extends ReadBaseDTO {
-  total: {
-    amount: number;
-    currency: string;
-  };
+export class ReadIncomeDTO extends ReadBaseDTO {
+  amount: number;
   categories: {
     id: number;
     name: string;
