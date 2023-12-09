@@ -1,12 +1,27 @@
-import { ExpenseRepository } from 'modules/expense/repository/expense.repository';
+import { ExpenseRepository } from 'modules/expense/repository';
 import { Expense } from 'modules/expense/entities/expense.entity';
 import { CreateExpenseDTO } from 'modules/expense/dtos';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 export class ExpenseRepositoryImplementation implements ExpenseRepository {
-  constructor() {}
+  constructor(
+    @InjectRepository(Expense)
+    private readonly typeOrmExpenseRepository: Repository<Expense>,
+  ) {}
 
-  createExpense(dto: CreateExpenseDTO): Promise<Expense> {
-    console.log({ dto });
-    throw new Error('Method not implemented.');
+  async createExpense(dto: CreateExpenseDTO): Promise<Expense> {
+    const expense = new Expense({
+      title: dto.title,
+      amount: dto.amount,
+      date: dto.date,
+      userId: dto.userId,
+    });
+    const created = await this.typeOrmExpenseRepository.save(expense);
+
+    return await this.typeOrmExpenseRepository.findOne({
+      where: { id: created.id },
+      relations: ['user'],
+    });
   }
 }

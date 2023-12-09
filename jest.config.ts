@@ -10,7 +10,7 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: '../coverage',
   coverageProvider: 'v8',
-  coveragePathIgnorePatterns: ['/node_modules/', '/test/'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/test/', '/mocks/'],
   moduleDirectories: ['node_modules', 'src'],
   rootDir: 'src',
   testRegex: '.*\\.spec\\.ts$',

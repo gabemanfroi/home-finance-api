@@ -8,7 +8,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class UserRepositoryImplementation implements UserRepository {
   constructor(
-    @InjectRepository(User) private readonly typeOrm: Repository<User>,
+    @InjectRepository(User)
+    private readonly typeOrmUserRepository: Repository<User>,
   ) {}
 
   async createUser(dto: CreateUserDTO): Promise<User> {
@@ -18,6 +19,6 @@ export class UserRepositoryImplementation implements UserRepository {
       firstName: dto.firstName,
       lastName: dto.lastName,
     });
-    return this.typeOrm.save(user);
+    return this.typeOrmUserRepository.save(user);
   }
 }

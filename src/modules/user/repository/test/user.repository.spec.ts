@@ -10,12 +10,6 @@ import { TypeOrmServiceMock } from 'utils/mocks/services/typeorm.service.mock';
 import { User } from 'modules/user/user.entity';
 import { Connection } from 'typeorm';
 
-const ENV_PATH_BY_ENV = {
-  test: '.env.test',
-  development: '.env',
-  production: '.env.production',
-};
-
 describe('Repositories - User', () => {
   let userRepository: UserRepository;
   let typeOrm: Connection;
@@ -29,7 +23,7 @@ describe('Repositories - User', () => {
         }),
         ConfigModule.forRoot({
           isGlobal: true,
-          envFilePath: ENV_PATH_BY_ENV[process.env.NODE_ENV],
+          envFilePath: '.env.test',
         }),
         TypeOrmModule.forFeature([User]),
       ],
@@ -45,13 +39,8 @@ describe('Repositories - User', () => {
     typeOrm = module.get<Connection>(Connection);
   });
 
-  afterEach(async () => {
-    await typeOrm.synchronize(true);
-  });
-
   describe('create', () => {
     it('should create a new user', async () => {
-      expect(userRepository).toBeDefined();
       const result = await userRepository.createUser(
         buildRandomCreateUserDTO(),
       );
