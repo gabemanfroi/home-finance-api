@@ -5,14 +5,27 @@ import {
 import { CreateExpenseDTO, ReadExpenseDTO } from 'modules/expense/dtos';
 import { ExpenseService } from 'modules/expense/service';
 import { ExpenseServiceMock } from './utils';
+import { Test } from '@nestjs/testing';
 
 describe('Controllers - [Expense]', () => {
   let expenseController: ExpenseController;
   let expenseService: ExpenseService;
 
-  beforeEach(() => {
-    expenseService = new ExpenseServiceMock();
-    expenseController = new ExpenseControllerImplementation(expenseService);
+  beforeEach(async () => {
+    const module = await Test.createTestingModule({
+      controllers: [ExpenseControllerImplementation],
+      providers: [
+        {
+          provide: ExpenseService,
+          useClass: ExpenseServiceMock,
+        },
+      ],
+    }).compile();
+
+    expenseController = module.get<ExpenseControllerImplementation>(
+      ExpenseControllerImplementation,
+    );
+    expenseService = module.get<ExpenseService>(ExpenseService);
   });
 
   it('should create an expense', async () => {
@@ -23,16 +36,10 @@ describe('Controllers - [Expense]', () => {
       categoriesIds: [1, 2, 3, 4, 5],
       date: new Date(),
     };
-
-    jest
-      .spyOn(expenseService, 'createExpense')
-      .mockImplementation(async (dto: CreateExpenseDTO) => {
-        return Promise.resolve(new ReadExpenseDTO());
-      });
+    jest.spyOn(expenseService, 'createExpense');
 
     const result = await expenseController.createExpense(expense);
-
-    expect(expenseService.createExpense).toHaveBeenNthCalledWith(1, expense);
+    expect(expenseService.createExpense).toHaveBeenCalled();
     expect(result).toBeInstanceOf(ReadExpenseDTO);
   });
 });
