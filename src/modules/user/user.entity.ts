@@ -19,7 +19,7 @@ export class User extends BaseEntity {
   @OneToMany(() => Expense, (expense) => expense.user)
   expenses: Expense[];
 
-  constructor(partial: Partial<User>) {
+  constructor(partial: Partial<User> = {}) {
     super();
     Object.assign(this, partial);
   }
