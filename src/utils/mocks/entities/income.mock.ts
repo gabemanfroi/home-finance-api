@@ -1,17 +1,9 @@
 import { Income, IncomeCategory } from 'modules/income/entities';
 import { randNumber, randSoonDate, randWord } from '@ngneat/falso';
 import { buildRandomUser } from 'utils/mocks/entities/user.mock';
-import { CreateIncomeDTO } from 'modules/income/dtos';
+import { CreateIncomeCategoryDTO, CreateIncomeDTO } from 'modules/income/dtos';
 
-const buildRandomIncomeCategory = () => {
-  const category: IncomeCategory = {
-    title: randWord(),
-    id: randNumber({ fraction: 0 }),
-  };
-  return Object.assign(new IncomeCategory(), category);
-};
-
-export const buildRandomIncome = (): Income => {
+export const buildRandomIncome = (partial: Partial<Income> = {}): Income => {
   const income: Income = {
     id: randNumber({ fraction: 0 }),
     createdAt: randSoonDate(),
@@ -21,6 +13,7 @@ export const buildRandomIncome = (): Income => {
     user: buildRandomUser(),
     title: randWord(),
     categories: [buildRandomIncomeCategory()],
+    ...partial,
   };
 
   return Object.assign(new Income(), income);
@@ -37,8 +30,35 @@ export const buildIncomeFromCreateDTO = (dto: CreateIncomeDTO): Income => {
     date: dto.date,
     user,
     title: dto.title,
-    categories: dto.categoriesIds.map(buildRandomIncomeCategory),
+    categories: dto.categoriesIds.map((id) => {
+      return buildRandomIncomeCategory({ id });
+    }),
   };
 
   return Object.assign(new Income(), income);
+};
+
+const buildRandomIncomeCategory = (
+  partial: Partial<IncomeCategory> = {},
+): IncomeCategory => {
+  const category: IncomeCategory = {
+    title: randWord(),
+    id: randNumber({ fraction: 0 }),
+    createdAt: randSoonDate(),
+    updatedAt: randSoonDate(),
+    ...partial,
+  };
+  return Object.assign(new IncomeCategory(), category);
+};
+
+export const buildIncomeCategoryFromCreateDTO = (
+  dto: CreateIncomeCategoryDTO,
+): IncomeCategory => {
+  const category: IncomeCategory = {
+    id: randNumber({ fraction: 0 }),
+    title: dto.title,
+    createdAt: randSoonDate(),
+    updatedAt: randSoonDate(),
+  };
+  return Object.assign(new IncomeCategory(), category);
 };

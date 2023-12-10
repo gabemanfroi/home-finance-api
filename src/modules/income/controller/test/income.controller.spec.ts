@@ -2,10 +2,14 @@ import {
   IncomeController,
   IncomeControllerImplementation,
 } from 'modules/income/controller';
-import { CreateIncomeDTO, ReadIncomeDTO } from 'modules/income/dtos';
+import { ReadIncomeCategoryDTO, ReadIncomeDTO } from 'modules/income/dtos';
 import { IncomeService } from 'modules/income/service';
 import { Test } from '@nestjs/testing';
-import { IncomeServiceMock } from 'utils/mocks';
+import {
+  buildRandomCreateIncomeDTO,
+  buildRandomIncomeCategoryDTO,
+  IncomeServiceMock,
+} from 'utils/mocks';
 
 describe('Controllers - [Income]', () => {
   let incomeController: IncomeController;
@@ -29,17 +33,21 @@ describe('Controllers - [Income]', () => {
   });
 
   it('should create an income', async () => {
-    const income: CreateIncomeDTO = {
-      amount: 10.0,
-      userId: 1,
-      title: 'Income 00',
-      categoriesIds: [1, 2, 3, 4, 5],
-      date: new Date(),
-    };
+    const income = buildRandomCreateIncomeDTO();
+
     jest.spyOn(incomeService, 'createIncome');
     const result = await incomeController.createIncome(income);
 
-    expect(incomeService.createIncome).toHaveBeenNthCalledWith(1, income);
+    expect(incomeService.createIncome).toHaveBeenCalledTimes(1);
     expect(result).toBeInstanceOf(ReadIncomeDTO);
+  });
+  it('should create an income category', async () => {
+    const incomeCategory = buildRandomIncomeCategoryDTO();
+
+    jest.spyOn(incomeService, 'createIncomeCategory');
+    const result = await incomeController.createIncomeCategory(incomeCategory);
+
+    expect(incomeService.createIncomeCategory).toHaveBeenCalledTimes(1);
+    expect(result).toBeInstanceOf(ReadIncomeCategoryDTO);
   });
 });

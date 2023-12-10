@@ -1,13 +1,27 @@
 import { IncomeService } from 'modules/income/service';
-import { CreateIncomeDTO, ReadIncomeDTO } from 'modules/income/dtos';
+import {
+  CreateIncomeCategoryDTO,
+  CreateIncomeDTO,
+  ReadIncomeCategoryDTO,
+  ReadIncomeDTO,
+} from 'modules/income/dtos';
+import { Injectable } from '@nestjs/common';
+import {
+  buildIncomeCategoryReadDTOFromCreateDTO,
+  buildIncomeReadDTOFromCreateDTO,
+} from 'utils/mocks/dtos/income';
 
+@Injectable()
 export class IncomeServiceMock implements IncomeService {
   constructor() {}
 
   async createIncome(dto: CreateIncomeDTO): Promise<ReadIncomeDTO> {
-    const created = new ReadIncomeDTO();
-    created.title = dto.title;
-    created.amount = dto.amount;
-    return new ReadIncomeDTO();
+    return buildIncomeReadDTOFromCreateDTO(dto);
+  }
+
+  async createIncomeCategory(
+    dto: CreateIncomeCategoryDTO,
+  ): Promise<ReadIncomeCategoryDTO> {
+    return buildIncomeCategoryReadDTOFromCreateDTO(dto);
   }
 }

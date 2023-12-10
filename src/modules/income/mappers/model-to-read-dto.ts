@@ -1,5 +1,5 @@
-import { ReadIncomeDTO } from 'modules/income/dtos';
-import { Income } from 'modules/income/entities/income.entity';
+import { ReadIncomeCategoryDTO, ReadIncomeDTO } from 'modules/income/dtos';
+import { Income, IncomeCategory } from 'modules/income/entities';
 
 export const mapIncomeToReadIncomeDTO = (income: Income): ReadIncomeDTO => {
   const { id, user, date, title, categories, amount, updatedAt, createdAt } =
@@ -10,12 +10,22 @@ export const mapIncomeToReadIncomeDTO = (income: Income): ReadIncomeDTO => {
     userId: user.id,
     date,
     title,
-    categories: categories.map((category) => ({
-      id: category.id,
-      title: category.title,
-    })),
+    categories: categories.map(mapIncomeCategoryToReadIncomeCategoryDTO),
     createdAt,
     updatedAt,
     amount,
+  });
+};
+
+export const mapIncomeCategoryToReadIncomeCategoryDTO = (
+  incomeCategory: IncomeCategory,
+): ReadIncomeCategoryDTO => {
+  const { id, title, createdAt, updatedAt } = incomeCategory;
+
+  return new ReadIncomeCategoryDTO({
+    id,
+    title,
+    createdAt,
+    updatedAt,
   });
 };

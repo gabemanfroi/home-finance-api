@@ -4,15 +4,18 @@ import { buildRandomUser } from 'utils/mocks/entities/user.mock';
 import { ExpenseCategory } from 'modules/expense/entities/expense-category.entity';
 import { CreateExpenseDTO } from 'modules/expense/dtos';
 
-const buildRandomExpenseCategory = () => {
+const buildRandomExpenseCategory = (
+  partial: Partial<ExpenseCategory> = {},
+): ExpenseCategory => {
   const category: ExpenseCategory = {
     title: randWord(),
     id: randNumber({ fraction: 0 }),
+    ...partial,
   };
   return Object.assign(new ExpenseCategory(), category);
 };
 
-export const buildRandomExpense = (): Expense => {
+export const buildRandomExpense = (partial: Partial<Expense> = {}): Expense => {
   const expense: Expense = {
     id: randNumber({ fraction: 0 }),
     createdAt: randSoonDate(),
@@ -22,6 +25,7 @@ export const buildRandomExpense = (): Expense => {
     user: buildRandomUser(),
     title: randWord(),
     categories: [buildRandomExpenseCategory()],
+    ...partial,
   };
 
   return Object.assign(new Expense(), expense);
@@ -38,7 +42,9 @@ export const buildExpenseFromCreateDTO = (dto: CreateExpenseDTO): Expense => {
     date: dto.date,
     user,
     title: dto.title,
-    categories: dto.categoriesIds.map(buildRandomExpenseCategory),
+    categories: dto.categoriesIds.map((id) => {
+      return buildRandomExpenseCategory({ id });
+    }),
   };
 
   return Object.assign(new Expense(), expense);

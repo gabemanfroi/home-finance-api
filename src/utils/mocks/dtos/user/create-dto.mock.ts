@@ -6,7 +6,9 @@ import {
   randPassword,
 } from '@ngneat/falso';
 
-export const buildRandomCreateUserDTO = (): CreateUserDTO => {
+export const buildRandomCreateUserDTO = (
+  partial: Partial<CreateUserDTO> = {},
+): CreateUserDTO => {
   const password = randPassword();
   const dto: CreateUserDTO = {
     firstName: randFirstName(),
@@ -14,6 +16,7 @@ export const buildRandomCreateUserDTO = (): CreateUserDTO => {
     lastName: randLastName(),
     confirmPassword: password,
     password,
+    ...partial,
   };
 
   return Object.assign(new CreateUserDTO(), dto);

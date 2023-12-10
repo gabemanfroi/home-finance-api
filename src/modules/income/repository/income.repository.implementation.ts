@@ -1,6 +1,6 @@
 import { IncomeRepository } from 'modules/income/repository';
 import { Income } from 'modules/income/entities/income.entity';
-import { CreateIncomeDTO } from 'modules/income/dtos';
+import { CreateIncomeCategoryDTO, CreateIncomeDTO } from 'modules/income/dtos';
 import { In, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IncomeCategory } from 'modules/income/entities';
@@ -36,5 +36,15 @@ export class IncomeRepositoryImplementation implements IncomeRepository {
       where: { id: created.id },
       relations: ['user', 'categories'],
     });
+  }
+
+  async createIncomeCategory(
+    dto: CreateIncomeCategoryDTO,
+  ): Promise<IncomeCategory> {
+    const category = new IncomeCategory({
+      title: dto.title,
+    });
+
+    return this.typeOrmIncomeCategoryRepository.save(category);
   }
 }
