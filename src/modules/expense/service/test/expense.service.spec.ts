@@ -5,10 +5,16 @@ import {
 import { ExpenseRepository } from 'modules/expense/repository';
 import { Test } from '@nestjs/testing';
 import {
+  buildRandomCreateExpenseCategoryDTO,
   buildRandomCreateExpenseDTO,
   ExpenseRepositoryMock,
 } from 'utils/mocks';
-import { CreateExpenseDTO, ReadExpenseDTO } from 'modules/expense/dtos';
+import {
+  CreateExpenseCategoryDTO,
+  CreateExpenseDTO,
+  ReadExpenseCategoryDTO,
+  ReadExpenseDTO,
+} from 'modules/expense/dtos';
 
 describe('Service - [Expense]', () => {
   let expenseService: ExpenseService;
@@ -51,5 +57,35 @@ describe('Service - [Expense]', () => {
       title: randomCreateExpenseDTO.title,
       date: randomCreateExpenseDTO.date,
     });
+  });
+  it('should create an expense category', async () => {
+    const randomCreateCategoryDTO: CreateExpenseCategoryDTO =
+      buildRandomCreateExpenseCategoryDTO();
+
+    jest.spyOn(expenseRepository, 'createExpenseCategory');
+    jest
+      .spyOn(expenseRepository, 'findExpenseCategoryByTitle')
+      .mockResolvedValue(null);
+
+    const result = await expenseService.createExpenseCategory(
+      randomCreateCategoryDTO,
+    );
+
+    expect(expenseRepository.createExpenseCategory).toHaveBeenCalledTimes(1);
+    expect(result).toBeInstanceOf(ReadExpenseCategoryDTO);
+    expect(result).toMatchObject<ReadExpenseCategoryDTO>({
+      title: randomCreateCategoryDTO.title,
+      createdAt: expect.any(Date),
+      updatedAt: expect.any(Date),
+      id: expect.any(Number),
+    });
+  });
+  it('should throw an error when creating an expense category with an existing name', async () => {
+    const randomCreateCategoryDTO: CreateExpenseCategoryDTO =
+      buildRandomCreateExpenseCategoryDTO();
+
+    await expect(
+      expenseService.createExpenseCategory(randomCreateCategoryDTO),
+    ).rejects.toThrow('Expense category already exists');
   });
 });

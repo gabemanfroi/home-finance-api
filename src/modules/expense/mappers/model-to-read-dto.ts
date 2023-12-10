@@ -1,5 +1,5 @@
-import { ReadExpenseDTO } from 'modules/expense/dtos';
-import { Expense } from 'modules/expense/entities/expense.entity';
+import { ReadExpenseCategoryDTO, ReadExpenseDTO } from 'modules/expense/dtos';
+import { Expense, ExpenseCategory } from 'modules/expense/entities';
 
 export const mapExpenseToReadExpenseDTO = (
   expense: Expense,
@@ -12,12 +12,22 @@ export const mapExpenseToReadExpenseDTO = (
     userId: user.id,
     date,
     title,
-    categories: categories.map((category) => ({
-      id: category.id,
-      title: category.title,
-    })),
+    categories: categories.map(mapExpenseCategoryToReadExpenseCategoryDTO),
     createdAt,
     updatedAt,
     amount,
+  });
+};
+
+export const mapExpenseCategoryToReadExpenseCategoryDTO = (
+  expenseCategory: ExpenseCategory,
+): ReadExpenseCategoryDTO => {
+  const { id, title, createdAt, updatedAt } = expenseCategory;
+
+  return new ReadExpenseCategoryDTO({
+    id,
+    title,
+    createdAt,
+    updatedAt,
   });
 };

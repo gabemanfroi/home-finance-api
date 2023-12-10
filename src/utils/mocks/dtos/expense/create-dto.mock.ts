@@ -1,4 +1,7 @@
-import { CreateExpenseDTO } from 'modules/expense/dtos';
+import {
+  CreateExpenseCategoryDTO,
+  CreateExpenseDTO,
+} from 'modules/expense/dtos';
 import { randNumber, randRecentDate, randWord } from '@ngneat/falso';
 
 export const buildRandomCreateExpenseDTO = (
@@ -10,6 +13,17 @@ export const buildRandomCreateExpenseDTO = (
     amount: randNumber({ fraction: 2, precision: 2 }),
     title: randWord(),
     categoriesIds: [],
+    ...partial,
+  };
+
+  return Object.assign(new CreateExpenseDTO(), dto);
+};
+
+export const buildRandomCreateExpenseCategoryDTO = (
+  partial: Partial<CreateExpenseCategoryDTO> = {},
+): CreateExpenseCategoryDTO => {
+  const dto = {
+    title: randWord(),
     ...partial,
   };
 
