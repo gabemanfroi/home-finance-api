@@ -10,22 +10,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IncomeRepositoryMock implements IncomeRepository {
-  async findIncomeCategoryByTitle(
-    name: string | null,
-  ): Promise<IncomeCategory> {
-    if (!name) {
-      return null;
-    }
-    return buildRandomIncomeCategory({ title: name });
+  async createIncome(dto: CreateIncomeDTO): Promise<Income> {
+    return buildIncomeFromCreateDTO(dto);
+  }
+
+  async findIncomeCategoryByTitle(title: string): Promise<IncomeCategory> {
+    return buildRandomIncomeCategory({ title });
   }
 
   async createIncomeCategory(
     dto: CreateIncomeCategoryDTO,
   ): Promise<IncomeCategory> {
     return buildIncomeCategoryFromCreateDTO(dto);
-  }
-
-  async createIncome(dto: CreateIncomeDTO): Promise<Income> {
-    return buildIncomeFromCreateDTO(dto);
   }
 }

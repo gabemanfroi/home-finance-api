@@ -1,4 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+} from 'typeorm';
 import { User } from 'modules/user/user.entity';
 import { ExpenseCategory } from 'modules/expense/entities/expense-category.entity';
 import { BaseEntity } from 'modules/shared/entities';
@@ -25,6 +32,7 @@ export class Expense extends BaseEntity {
     () => ExpenseCategory,
     (expenseCategory) => expenseCategory.expenses,
   )
+  @JoinTable()
   categories?: ExpenseCategory[];
 
   constructor(partial: Partial<Expense> = {}) {

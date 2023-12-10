@@ -85,6 +85,6 @@ describe('Service - [Income]', () => {
 
     await expect(
       incomeService.createIncomeCategory(randomCreateCategoryDTO),
-    ).rejects.toThrowError('Income category already exists');
+    ).rejects.toThrow('Income category already exists');
   });
 });

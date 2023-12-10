@@ -2,15 +2,14 @@ import { Test } from '@nestjs/testing';
 import { buildRandomCreateIncomeDTO, buildRandomUser } from 'utils/mocks';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmServiceMock } from 'utils/mocks/services/typeorm.service.mock';
+import { TypeOrmServiceMock } from 'utils/mocks/services';
 import { Connection } from 'typeorm';
 import {
   IncomeRepository,
   IncomeRepositoryImplementation,
 } from 'modules/income/repository';
-import { Income } from 'modules/income/entities/income.entity';
+import { Income, IncomeCategory } from 'modules/income/entities';
 import { User } from 'modules/user';
-import { IncomeCategory } from 'modules/income/entities';
 
 describe('Repositories - Income', () => {
   let incomeRepository: IncomeRepository;

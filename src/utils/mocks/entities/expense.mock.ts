@@ -1,15 +1,20 @@
 import { Expense } from 'modules/expense/entities/expense.entity';
 import { randNumber, randSoonDate, randWord } from '@ngneat/falso';
 import { buildRandomUser } from 'utils/mocks/entities/user.mock';
-import { ExpenseCategory } from 'modules/expense/entities/expense-category.entity';
-import { CreateExpenseDTO } from 'modules/expense/dtos';
+import {
+  CreateExpenseCategoryDTO,
+  CreateExpenseDTO,
+} from 'modules/expense/dtos';
+import { ExpenseCategory } from 'modules/expense/entities';
 
-const buildRandomExpenseCategory = (
+export const buildRandomExpenseCategory = (
   partial: Partial<ExpenseCategory> = {},
 ): ExpenseCategory => {
   const category: ExpenseCategory = {
     title: randWord(),
     id: randNumber({ fraction: 0 }),
+    createdAt: randSoonDate(),
+    updatedAt: randSoonDate(),
     ...partial,
   };
   return Object.assign(new ExpenseCategory(), category);
@@ -48,4 +53,16 @@ export const buildExpenseFromCreateDTO = (dto: CreateExpenseDTO): Expense => {
   };
 
   return Object.assign(new Expense(), expense);
+};
+
+export const buildExpenseCategoryFromCreateDTO = (
+  dto: CreateExpenseCategoryDTO,
+): ExpenseCategory => {
+  const category: ExpenseCategory = {
+    id: randNumber({ fraction: 0 }),
+    title: dto.title,
+    createdAt: randSoonDate(),
+    updatedAt: randSoonDate(),
+  };
+  return Object.assign(new ExpenseCategory(), category);
 };

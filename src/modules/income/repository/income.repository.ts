@@ -8,5 +8,5 @@ export abstract class IncomeRepository {
     dto: CreateIncomeCategoryDTO,
   ): Promise<IncomeCategory>;
 
-  abstract findIncomeCategoryByTitle(name: string): Promise<IncomeCategory>;
+  abstract findIncomeCategoryByTitle(title: string): Promise<IncomeCategory>;
 }

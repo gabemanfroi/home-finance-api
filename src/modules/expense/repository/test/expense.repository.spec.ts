@@ -2,13 +2,13 @@ import { Test } from '@nestjs/testing';
 import { buildRandomCreateExpenseDTO, buildRandomUser } from 'utils/mocks';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmServiceMock } from 'utils/mocks/services/typeorm.service.mock';
+import { TypeOrmServiceMock } from 'utils/mocks/services';
 import { Connection } from 'typeorm';
 import {
   ExpenseRepository,
   ExpenseRepositoryImplementation,
 } from 'modules/expense/repository';
-import { Expense } from 'modules/expense/entities/expense.entity';
+import { Expense, ExpenseCategory } from 'modules/expense/entities';
 import { User } from 'modules/user';
 
 describe('Repositories - Expense', () => {
@@ -26,7 +26,7 @@ describe('Repositories - Expense', () => {
           isGlobal: true,
           envFilePath: '.env.test',
         }),
-        TypeOrmModule.forFeature([Expense, User]),
+        TypeOrmModule.forFeature([Expense, User, ExpenseCategory]),
       ],
       providers: [
         {
@@ -46,7 +46,14 @@ describe('Repositories - Expense', () => {
         .getRepository(User)
         .save(buildRandomUser());
 
-      const dto = buildRandomCreateExpenseDTO({ userId });
+      const { id: categoryId } = await typeOrm
+        .getRepository(ExpenseCategory)
+        .save({ title: 'Category' });
+
+      const dto = buildRandomCreateExpenseDTO();
+      dto.userId = userId;
+      dto.categoriesIds = [categoryId];
+
       const result = await expenseRepository.createExpense(dto);
 
       expect(result).toBeInstanceOf(Expense);
@@ -64,11 +71,49 @@ describe('Repositories - Expense', () => {
     it('should create a new expense with a user', async () => {
       const user = await typeOrm.getRepository(User).save(buildRandomUser());
 
-      const dto = buildRandomCreateExpenseDTO({ userId: user.id });
+      const dto = buildRandomCreateExpenseDTO();
+      dto.userId = user.id;
+
       const result = await expenseRepository.createExpense(dto);
 
       expect(result.user).toBeInstanceOf(User);
       expect(result.user).toEqual(user);
+    });
+    it('should create a new expense with categories', async () => {
+      const { id: userId } = await typeOrm
+        .getRepository(User)
+        .save(buildRandomUser());
+
+      const category = await typeOrm
+        .getRepository(ExpenseCategory)
+        .save({ title: 'Category' });
+
+      const dto = buildRandomCreateExpenseDTO();
+      dto.userId = userId;
+      dto.categoriesIds = [category.id];
+
+      const result = await expenseRepository.createExpense(dto);
+
+      expect(result.categories).toEqual([category]);
+    });
+    it('should throw an error if the user does not exist', async () => {
+      const dto = buildRandomCreateExpenseDTO();
+      dto.userId = -1;
+
+      await expect(expenseRepository.createExpense(dto)).rejects.toThrow();
+    });
+    it('should throw an error if one of the categories does not exist', async () => {
+      const { id: userId } = await typeOrm
+        .getRepository(User)
+        .save(buildRandomUser());
+
+      const dto = buildRandomCreateExpenseDTO();
+      dto.userId = userId;
+      dto.categoriesIds = [-1];
+
+      await expect(expenseRepository.createExpense(dto)).rejects.toThrow(
+        'One or more category IDs are invalid.',
+      );
     });
   });
 });
