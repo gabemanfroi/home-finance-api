@@ -1,4 +1,7 @@
-import { CreateIncomeCategoryDTO, CreateIncomeDTO } from 'modules/income/dtos';
+import {
+  CreateIncomeCategoryDTO,
+  CreateIncomeDTO,
+} from 'modules/transaction/dtos';
 import { randNumber, randRecentDate, randWord } from '@ngneat/falso';
 
 export const buildRandomCreateIncomeDTO = (

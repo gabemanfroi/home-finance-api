@@ -1,16 +1,16 @@
-import { ExpenseRepository } from 'modules/expense/repository';
+import { ExpenseRepository } from 'modules/transaction/repositories';
 import {
   CreateExpenseCategoryDTO,
   CreateExpenseDTO,
-} from 'modules/expense/dtos';
-import { Expense } from 'modules/expense/entities/expense.entity';
+} from 'modules/transaction/dtos';
+import { Expense } from 'modules/transaction/entities/expense.entity';
 import {
   buildExpenseCategoryFromCreateDTO,
   buildExpenseFromCreateDTO,
   buildRandomExpenseCategory,
 } from 'utils/mocks/entities/expense.mock';
 import { Injectable } from '@nestjs/common';
-import { ExpenseCategory } from 'modules/expense/entities';
+import { ExpenseCategory } from 'modules/transaction/entities';
 
 @Injectable()
 export class ExpenseRepositoryMock implements ExpenseRepository {

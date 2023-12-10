@@ -3,7 +3,7 @@ import {
   CreateIncomeDTO,
   ReadIncomeCategoryDTO,
   ReadIncomeDTO,
-} from 'modules/income/dtos';
+} from 'modules/transaction/dtos';
 import { randNumber, randSoonDate, randWord } from '@ngneat/falso';
 
 export const buildRandomIncomeCategoryDTO = (

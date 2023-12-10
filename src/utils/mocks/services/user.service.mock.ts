@@ -1,4 +1,4 @@
-import { UserService } from 'modules/user/service/user.service';
+import { UserService } from 'modules/user/services/user.service';
 import { ReadUserDTO } from 'modules/user/dtos';
 
 export class UserServiceMock implements UserService {

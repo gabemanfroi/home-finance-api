@@ -1,10 +1,10 @@
-import { IncomeService } from 'modules/income/service';
+import { IncomeService } from 'modules/transaction/services';
 import {
   CreateIncomeCategoryDTO,
   CreateIncomeDTO,
   ReadIncomeCategoryDTO,
   ReadIncomeDTO,
-} from 'modules/income/dtos';
+} from 'modules/transaction/dtos';
 import { Injectable } from '@nestjs/common';
 import {
   buildIncomeCategoryReadDTOFromCreateDTO,

@@ -1,7 +1,10 @@
-import { Income, IncomeCategory } from 'modules/income/entities';
+import { Income, IncomeCategory } from 'modules/transaction/entities';
 import { randNumber, randSoonDate, randWord } from '@ngneat/falso';
 import { buildRandomUser } from 'utils/mocks/entities/user.mock';
-import { CreateIncomeCategoryDTO, CreateIncomeDTO } from 'modules/income/dtos';
+import {
+  CreateIncomeCategoryDTO,
+  CreateIncomeDTO,
+} from 'modules/transaction/dtos';
 
 export const buildRandomIncome = (partial: Partial<Income> = {}): Income => {
   const income: Income = {

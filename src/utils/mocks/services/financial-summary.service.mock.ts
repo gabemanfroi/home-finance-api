@@ -1,4 +1,4 @@
-import { FinancialSummaryService } from 'modules/financial-summary/service';
+import { FinancialSummaryService } from 'modules/financial-summary/services';
 import { ReadFinancialSummaryDTO } from 'modules/financial-summary/dtos';
 
 export class FinancialSummaryServiceMock implements FinancialSummaryService {

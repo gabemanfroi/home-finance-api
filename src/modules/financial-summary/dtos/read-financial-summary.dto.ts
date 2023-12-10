@@ -1,5 +1,4 @@
-import { ReadIncomeDTO } from 'modules/income/dtos';
-import { ReadExpenseDTO } from 'modules/expense/dtos';
+import { ReadExpenseDTO, ReadIncomeDTO } from 'modules/transaction/dtos';
 
 export class ReadFinancialSummaryDTO {
   id: string;
@@ -8,4 +7,5 @@ export class ReadFinancialSummaryDTO {
   totalBalance: number;
   incomes: ReadIncomeDTO[];
   expenses: ReadExpenseDTO[];
+  latestTransactions: (ReadIncomeDTO | ReadExpenseDTO)[];
 }

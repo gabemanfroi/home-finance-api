@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmService } from 'core/db/typeorm/typeorm.service';
 import { UserModule } from 'modules/user';
-import { IncomeModule } from 'modules/income/income.module';
+import { TransactionModule } from 'modules/transaction/transaction.module';
 
 const ENV_PATH_BY_ENV = {
   test: '.env.test',
@@ -22,7 +22,7 @@ console.log(process.env.NODE_ENV);
       useClass: TypeOrmService,
     }),
     UserModule,
-    IncomeModule,
+    TransactionModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ENV_PATH_BY_ENV[process.env.NODE_ENV],

@@ -3,7 +3,7 @@ import {
   CreateExpenseDTO,
   ReadExpenseCategoryDTO,
   ReadExpenseDTO,
-} from 'modules/expense/dtos';
+} from 'modules/transaction/dtos';
 import { randNumber, randSoonDate, randWord } from '@ngneat/falso';
 
 export const buildRandomExpenseCategoryDTO = (

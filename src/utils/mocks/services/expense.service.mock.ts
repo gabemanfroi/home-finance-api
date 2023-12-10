@@ -1,10 +1,10 @@
-import { ExpenseService } from 'modules/expense/service';
+import { ExpenseService } from 'modules/transaction/services';
 import {
   CreateExpenseCategoryDTO,
   CreateExpenseDTO,
   ReadExpenseCategoryDTO,
   ReadExpenseDTO,
-} from 'modules/expense/dtos';
+} from 'modules/transaction/dtos';
 import { Injectable } from '@nestjs/common';
 import {
   buildExpenseCategoryReadDTOFromCreateDTO,

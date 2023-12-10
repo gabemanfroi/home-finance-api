@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
-import { Expense } from 'modules/expense/entities/expense.entity';
+import { Expense } from 'modules/transaction/entities/expense.entity';
 import { BaseEntity } from 'modules/shared/entities';
-import { Income } from 'modules/income/entities';
+import { Income } from 'modules/transaction/entities';
 
 @Entity()
 export class User extends BaseEntity {

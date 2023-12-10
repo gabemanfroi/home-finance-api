@@ -1,6 +1,9 @@
-import { IncomeRepository } from 'modules/income/repository';
-import { CreateIncomeCategoryDTO, CreateIncomeDTO } from 'modules/income/dtos';
-import { Income, IncomeCategory } from 'modules/income/entities';
+import { IncomeRepository } from 'modules/transaction/repositories';
+import {
+  CreateIncomeCategoryDTO,
+  CreateIncomeDTO,
+} from 'modules/transaction/dtos';
+import { Income, IncomeCategory } from 'modules/transaction/entities';
 import {
   buildIncomeCategoryFromCreateDTO,
   buildIncomeFromCreateDTO,

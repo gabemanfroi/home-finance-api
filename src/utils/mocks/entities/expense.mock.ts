@@ -1,11 +1,11 @@
-import { Expense } from 'modules/expense/entities/expense.entity';
+import { Expense } from 'modules/transaction/entities/expense.entity';
 import { randNumber, randSoonDate, randWord } from '@ngneat/falso';
 import { buildRandomUser } from 'utils/mocks/entities/user.mock';
 import {
   CreateExpenseCategoryDTO,
   CreateExpenseDTO,
-} from 'modules/expense/dtos';
-import { ExpenseCategory } from 'modules/expense/entities';
+} from 'modules/transaction/dtos';
+import { ExpenseCategory } from 'modules/transaction/entities';
 
 export const buildRandomExpenseCategory = (
   partial: Partial<ExpenseCategory> = {},
