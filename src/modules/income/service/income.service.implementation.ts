@@ -6,7 +6,7 @@ import {
 } from 'modules/income/dtos';
 import { IncomeService } from 'modules/income/service';
 import { IncomeRepository } from 'modules/income/repository';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import {
   mapIncomeCategoryToReadIncomeCategoryDTO,
   mapIncomeToReadIncomeDTO,
@@ -24,6 +24,14 @@ export class IncomeServiceImplementation implements IncomeService {
   async createIncomeCategory(
     dto: CreateIncomeCategoryDTO,
   ): Promise<ReadIncomeCategoryDTO> {
+    const found = await this.incomeRepository.findIncomeCategoryByTitle(
+      dto.title,
+    );
+
+    if (found) {
+      throw new BadRequestException('Income category already exists');
+    }
+
     const created = await this.incomeRepository.createIncomeCategory(dto);
     return mapIncomeCategoryToReadIncomeCategoryDTO(created);
   }

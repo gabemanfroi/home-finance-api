@@ -47,4 +47,10 @@ export class IncomeRepositoryImplementation implements IncomeRepository {
 
     return this.typeOrmIncomeCategoryRepository.save(category);
   }
+
+  async findIncomeCategoryByTitle(name: string): Promise<IncomeCategory> {
+    return this.typeOrmIncomeCategoryRepository.findOne({
+      where: { title: name },
+    });
+  }
 }

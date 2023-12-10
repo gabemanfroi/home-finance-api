@@ -46,9 +46,7 @@ describe('Repositories - Expense', () => {
         .getRepository(User)
         .save(buildRandomUser());
 
-      const dto = buildRandomCreateExpenseDTO();
-      dto.userId = userId;
-
+      const dto = buildRandomCreateExpenseDTO({ userId });
       const result = await expenseRepository.createExpense(dto);
 
       expect(result).toBeInstanceOf(Expense);
@@ -66,9 +64,7 @@ describe('Repositories - Expense', () => {
     it('should create a new expense with a user', async () => {
       const user = await typeOrm.getRepository(User).save(buildRandomUser());
 
-      const dto = buildRandomCreateExpenseDTO();
-      dto.userId = user.id;
-
+      const dto = buildRandomCreateExpenseDTO({ userId: user.id });
       const result = await expenseRepository.createExpense(dto);
 
       expect(result.user).toBeInstanceOf(User);

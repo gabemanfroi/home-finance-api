@@ -62,6 +62,10 @@ describe('Service - [Income]', () => {
       buildRandomCreateIncomeCategoryDTO();
 
     jest.spyOn(incomeRepository, 'createIncomeCategory');
+    jest
+      .spyOn(incomeRepository, 'findIncomeCategoryByTitle')
+      .mockResolvedValue(null);
+
     const result = await incomeService.createIncomeCategory(
       randomCreateCategoryDTO,
     );
@@ -74,5 +78,13 @@ describe('Service - [Income]', () => {
       updatedAt: expect.any(Date),
       id: expect.any(Number),
     });
+  });
+  it('should throw an error when creating an income category with an existing name', async () => {
+    const randomCreateCategoryDTO: CreateIncomeCategoryDTO =
+      buildRandomCreateIncomeCategoryDTO();
+
+    await expect(
+      incomeService.createIncomeCategory(randomCreateCategoryDTO),
+    ).rejects.toThrowError('Income category already exists');
   });
 });

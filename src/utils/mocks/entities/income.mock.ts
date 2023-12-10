@@ -38,7 +38,7 @@ export const buildIncomeFromCreateDTO = (dto: CreateIncomeDTO): Income => {
   return Object.assign(new Income(), income);
 };
 
-const buildRandomIncomeCategory = (
+export const buildRandomIncomeCategory = (
   partial: Partial<IncomeCategory> = {},
 ): IncomeCategory => {
   const category: IncomeCategory = {
